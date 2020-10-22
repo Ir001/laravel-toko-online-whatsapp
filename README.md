@@ -8,7 +8,7 @@ Lorem ipsum
 ## Usage
 
 ```git
-git clone https://github.com/ir001/laravel-toko-online
+git clone https://github.com/ir001/laravel-toko-online-whatsapp
 ```
 
 ## Fitur
