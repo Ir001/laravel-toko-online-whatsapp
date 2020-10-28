@@ -16,10 +16,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'LandingpageController@index');
 
-// Auth::routes();
+Route::group(['prefix' => 'seller'], function () {
+    Route::get('login', 'Seller\LoginController@index')->name('seller.login');
+    Route::get('logout', 'Seller\LoginController@logout')->name('seller.logout');
+    Route::post('login', 'Seller\LoginController@login');
+    Route::get('register', 'Seller\RegisterController@index')->name('seller.register');
+    Route::post('register', 'Seller\RegisterController@register');
+    Route::group(['middleware' => ['auth:seller']], function () {
+        Route::get('dashboard', 'Seller\DashboardController@index')->name('seller.dashboard');
+        Route::get('product', 'Seller\ProductController@index')->name('seller.product');
+        Route::get('profile', 'Seller\ProfileController@index')->name('seller.profile');
+        Route::get('setting', 'Seller\SettingController@index')->name('seller.setting');
+    });
+});
+Route::group(['prefix' => 'buyer'], function () {
+    Route::get('login', 'Buyer\LoginController@index')->name('login');
+
+});
 Route::group(['prefix' => 'admin-panel'], function () {
     /* Login */
-    Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::get('login', 'Auth\LoginController@showLoginForm')->name('admin.login');
     Route::post('login', 'Auth\LoginController@login');
     /* Logout */
     Route::post('logout', 'Auth\LoginController@logout');

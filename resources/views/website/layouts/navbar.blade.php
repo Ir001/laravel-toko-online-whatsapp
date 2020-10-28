@@ -19,16 +19,29 @@
             </form>
         </ul>
         <ul class="navbar-nav ml-auto">
+            @guest
             <li class="nav-item">
                 <a class="nav-link" href="#"><i class="fa fa-user-plus fa-sm"></i> Daftar</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sm fa-sign-in-alt"></i> Masuk</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="#">Pembeli</a>
-                <a class="dropdown-item" href="#">Penjual</a>
+                <a class="dropdown-item" href="/buyer/login">Pembeli</a>
+                <a class="dropdown-item" href="/seller/login">Penjual</a>
                 </div>
             </li>
+            @endguest
+            @if (auth('seller')->check())
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('seller.logout')}}"><i class="fa fa-sm fa-sign-out-alt"></i> Keluar</a>
+            </li>
+            @endif
+            @if (auth('buyer')->check())
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('logout')}}"><i class="fa fa-sm fa-sign-out-alt"></i> Keluar</a>
+            </li>
+            @endif
+
         </ul>
 
         </div>
