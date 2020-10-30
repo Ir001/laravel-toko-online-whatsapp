@@ -24,37 +24,50 @@
                         <i class="fa fa-xs fa-plus"></i> Tambah Produk
                     </a>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
+                <div class="row mt-3">
+                    @foreach ($product as $item)
+                    <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-image">
                                 <img class="img img-thumbnail" src="https://cdn.idntimes.com/content-images/community/2019/06/duren-sawit-kuliner-6-bakso-dan-mie-ayam-favorioriginal-c44a0544fb0c5cc279fb6df2aaa66566_600x400.jpg" alt="">
                             </div>
                             <div class="card-body">
                                 <h2 class="h5">
-                                    Bakso Mang Oleh
+                                    {{$item->name}}
                                 </h2>
                                 <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic, at?...
+                                    {!!Str::limit($item->description,50)!!}
                                 </p>
                             </div>
                             <div class="card-footer d-flex justify-content-between align-items-center">
                                 <h3 class="h5">
-                                    Rp. 10.000
+                                    @currency($item->price)
                                 </h3>
                                 <div>
-                                    <a href="" class="btn btn-sm btn-info">
+                                    <a href="/seller/product/{{$item->slug}}/edit" class="btn btn-sm btn-info">
                                         <i class="fa fa-xs fa-pen"></i>
                                         Ubah
                                     </a>
-                                    <a href="" class="btn btn-sm btn-danger">
-                                        <i class="fa fa-xs fa-trash"></i>
-                                        Hapus
-                                    </a>
+                                    <form action="/seller/product/{{$item->slug}}" method="post" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button onclick="return confirm('Apakah Anda yakin ingin menghapusnya?')" type="sumit" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-xs fa-trash"></i>
+                                            Hapus
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
+                    <div class="clearfix"></div>
+                    <div class="col-md-6 mx-auto">
+                        <div class="d-flex justify-content-center">
+                            {{$product->render()}}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -70,9 +83,6 @@
                 title:'Berhasil',
                 text:"{{session()->get('success')}}",
             });
-            setTimeout(function(){
-                window.location.href="/seller/login";
-            },1200);
         </script>
     @endif
 @endsection

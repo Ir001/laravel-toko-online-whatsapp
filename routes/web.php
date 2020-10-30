@@ -28,6 +28,9 @@ Route::group(['prefix' => 'seller'], function () {
         Route::get('product', 'Seller\ProductController@index')->name('seller.product');
         Route::get('product/create', 'Seller\ProductController@create')->name('seller.product.create');
         Route::post('product', 'Seller\ProductController@store')->name('seller.product.store');
+        Route::get('product/{product:slug}/edit', 'Seller\ProductController@edit');
+        Route::patch('product/{product:slug}', 'Seller\ProductController@update');
+        Route::delete('product/{product:slug}', 'Seller\ProductController@destroy');
 
         Route::get('profile', 'Seller\ProfileController@index')->name('seller.profile');
         Route::get('setting', 'Seller\SettingController@index')->name('seller.setting');

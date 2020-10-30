@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required',
             'images' => 'nullable|file|mimes:png,jpg,jpeg',
-            'price' => 'required|digits_between:500,10000000',
+            'price' => 'required|integer|between:500,10000000',
             'category_id' => 'required',
             'description' => 'required',
             'tags.*' => 'nullable',
