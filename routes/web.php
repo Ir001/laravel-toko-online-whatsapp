@@ -24,7 +24,11 @@ Route::group(['prefix' => 'seller'], function () {
     Route::post('register', 'Seller\RegisterController@register');
     Route::group(['middleware' => ['auth:seller']], function () {
         Route::get('dashboard', 'Seller\DashboardController@index')->name('seller.dashboard');
+        // Product
         Route::get('product', 'Seller\ProductController@index')->name('seller.product');
+        Route::get('product/create', 'Seller\ProductController@create')->name('seller.product.create');
+        Route::post('product', 'Seller\ProductController@store')->name('seller.product.store');
+
         Route::get('profile', 'Seller\ProfileController@index')->name('seller.profile');
         Route::get('setting', 'Seller\SettingController@index')->name('seller.setting');
     });
