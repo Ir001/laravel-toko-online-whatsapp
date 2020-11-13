@@ -21,14 +21,11 @@ class ProductController extends Controller
     }
     public function store(ProductRequest $request){
         $model = new Product();
-        if(isset($request->validator) && $request->validator->fails()){
-            return back()->withErrors($request);
-        }
         $attr = $request->validated();
         $attr['seller_id'] = auth('seller')->user()->id;
         $attr['slug'] = Str::slug($attr['name']).'-'.$this->slug_suffle();
-        if($request->has('foto')){
-            $attr['images'] = $model->handleFoto($request->foto);
+        if($request->has('images')){
+            $attr['images'] = $model->handleFoto($request);
         }
         try{
             $model->create($attr);

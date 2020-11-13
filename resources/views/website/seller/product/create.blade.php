@@ -42,7 +42,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Foto Produk</label>
-                                <input type="file" name="foto" value="{{old('file')}}" class="form-control">
+                                <input type="file" name="images" value="{{old('file')}}" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Harga Satuan Produk <small class="text-danger">*</small></label>

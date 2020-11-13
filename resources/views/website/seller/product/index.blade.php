@@ -29,7 +29,8 @@
                     <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-image">
-                                <img class="img img-thumbnail" src="https://cdn.idntimes.com/content-images/community/2019/06/duren-sawit-kuliner-6-bakso-dan-mie-ayam-favorioriginal-c44a0544fb0c5cc279fb6df2aaa66566_600x400.jpg" alt="">
+                                {{-- <img class="img img-thumbnail" src="https://cdn.idntimes.com/content-images/community/2019/06/duren-sawit-kuliner-6-bakso-dan-mie-ayam-favorioriginal-c44a0544fb0c5cc279fb6df2aaa66566_600x400.jpg" alt=""> --}}
+                                <img class="img img-thumbnail" src="{{asset($item->images)}}" alt="">
                             </div>
                             <div class="card-body">
                                 <h2 class="h5">
