@@ -36,14 +36,24 @@ class ProductController extends Controller
     }
     public function edit(Product $product){
         $this->checkUser($product);
-        dd($product);
+       return view('website.seller.product.edit', compact('product'));
     }
-    public function update(Product $product){
+    public function update(ProductRequest $request, Product $product){
+        $model = new Product();
         $this->checkUser($product);
-        dd($product);
+        $attr = $request->validated();
+        if($request->has('images')){
+            $attr['images'] = $model->updateFoto($request, $product->images);
+        }
+        try{
+            $product->update($attr);
+            return back()->withSuccess('Produk baru telah diubah!');
+        }catch(Exception $e){
+            return back()->withErrors('Error : '.$e->getMessage());
+        }
     }
     public function destroy(Product $product){
-        $this->checkUser();
+        $this->checkUser($product);
         try{
             $product->delete();
             return back()->withSuccess('Produk telah dihapus!');

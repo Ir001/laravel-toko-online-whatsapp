@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h1 class="card-title h5">
-                            Tambah Produk
+                            Edit Produk
                         </h1>
                     </div>
 
@@ -34,19 +34,21 @@
                             </p>
                             @endforeach
                         @endif
-                        <form action="{{route('seller.product.store')}}" enctype="multipart/form-data" method="post">
+                        <form action="{{route('seller.product')."/{$product->slug}"}}" enctype="multipart/form-data" method="post">
                             @csrf
+                            @method('PATCH')
                             <div class="form-group">
                                 <label>Nama Produk <small class="text-danger">*</small></label>
-                                <input type="text" name="name" value="{{old('name')}}" placeholder="Nama Produk. cth: Bakso Ekstra Pedas" class="form-control">
+                                <input type="text" name="name" value="{{old('name', $product->name)}}" placeholder="Nama Produk. cth: Bakso Ekstra Pedas" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label>Foto Produk</label>
-                                <input type="file" name="foto" value="{{old('file')}}" class="form-control">
+                                <label class="d-block">Foto Produk</label>
+                                <img src="{{asset($product->images)}}" alt="Foto {{$product->name}}" class="img img-thumbnail col-md-4">
+                                <input type="file" name="images" value="{{old('images')}}" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Harga Satuan Produk <small class="text-danger">*</small></label>
-                                <input type="number" name="price" value="{{old('price')}}" placeholder="Harga Produk. cth: 10000" class="form-control">
+                                <input type="number" name="price" value="{{old('price', $product->price)}}" placeholder="Harga Produk. cth: 10000" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Kategori Produk <small class="text-danger">*</small></label>
@@ -73,7 +75,7 @@
                                     Kembali
                                 </a>
                                 <button type="submit" class="btn btn-sm btn-info">
-                                    Tambah Produk
+                                    Edit Produk
                                 </button>
                             </div>
                         </form>
@@ -95,7 +97,7 @@
         placeholder : 'Tuliskan deskripsi produk Anda',
         height: 150
     });
-    var descriptionHTML = '{{old('description')}}';
+    var descriptionHTML = '{!!old('description', $product->description)!!}';
     $('#description').summernote('code', descriptionHTML);
 </script>
     @if (session()->has('success'))
