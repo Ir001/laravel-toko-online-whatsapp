@@ -38,6 +38,7 @@ Route::group(['prefix' => 'seller'], function () {
 });
 Route::group(['prefix' => 'buyer'], function () {
     Route::get('login', 'Buyer\LoginController@index')->name('login');
+    Route::get('logout', 'Buyer\LoginController@index')->name('logout');
 
 });
 Route::group(['prefix' => 'admin-panel'], function () {
@@ -55,5 +56,4 @@ Route::group(['prefix' => 'admin-panel'], function () {
     Route::post('password/reset', 'Auth\ForgotPasswordController@reset')->name('password.update');
     Route::match(['get', 'head'], 'password/reset/{token}', 'Auth\ForgotPasswordController@showResetForm')->name('password.reset');
 });
-
 Route::get('admin-panel', 'HomeController@index')->name('home');

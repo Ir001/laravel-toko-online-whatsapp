@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <label>Kategori Produk <small class="text-danger">*</small></label>
                                 <select name="category_id" class="form-control">
-                                    <option hidden>Pilih Kategori Produk Anda</option>
+                                    <option disabled>Pilih Kategori Produk Anda</option>
                                     <option value="1">Makanan/Minuman</option>
                                 </select>
                             </div>

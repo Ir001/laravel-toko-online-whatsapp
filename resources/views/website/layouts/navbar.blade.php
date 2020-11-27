@@ -19,7 +19,8 @@
             </form>
         </ul>
         <ul class="navbar-nav ml-auto">
-            @guest
+            @guest('seller')
+            @guest()
             <li class="nav-item">
                 <a class="nav-link" href="#"><i class="fa fa-user-plus fa-sm"></i> Daftar</a>
             </li>
@@ -31,16 +32,20 @@
                 </div>
             </li>
             @endguest
-            @if (auth('seller')->check())
+            @endguest
+            @auth('seller')
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('seller.dashboard')}}"><i class="fa fa-sm fa-th"></i> Dashoard</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('seller.logout')}}"><i class="fa fa-sm fa-sign-out-alt"></i> Keluar</a>
             </li>
-            @endif
-            @if (auth('buyer')->check())
+            @endauth
+            @auth('buyer')
             <li class="nav-item">
                 <a class="nav-link" href="{{route('logout')}}"><i class="fa fa-sm fa-sign-out-alt"></i> Keluar</a>
             </li>
-            @endif
+            @endauth
 
         </ul>
 
