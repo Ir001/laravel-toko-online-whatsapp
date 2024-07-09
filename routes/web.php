@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'LandingpageController@index');
 
 Route::group(['prefix' => 'seller'], function () {
-    Route::get('login', 'Seller\LoginController@index')->name('seller.login');
+    Route::get('login', 'App\Http\Controllers\Seller\LoginController@index')->name('seller.login');
     Route::get('logout', 'Seller\LoginController@logout')->name('seller.logout');
     Route::post('login', 'Seller\LoginController@login');
     Route::get('register', 'Seller\RegisterController@index')->name('seller.register');
@@ -37,7 +37,7 @@ Route::group(['prefix' => 'seller'], function () {
     });
 });
 Route::group(['prefix' => 'buyer'], function () {
-    Route::get('login', 'Buyer\LoginController@index')->name('login');
+    Route::get('login', 'App\Http\Controllers\Buyer\LoginController@index')->name('login');
     Route::get('logout', 'Buyer\LoginController@index')->name('logout');
 
 });
